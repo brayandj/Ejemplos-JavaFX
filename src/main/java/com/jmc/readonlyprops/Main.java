@@ -9,34 +9,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-//        Constant constant = new Constant(100);
-//        constant.changeConstant();
-//        System.out.println(constant.getReadOnlyNumber().get());
         VBox root = new VBox();
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
-        ObservableList<String> list = FXCollections.observableArrayList("one", "two", "three");
-        ListView<String> items = new ListView<>();
-        items.setItems(list);
-        TextField field = new TextField();
-        field.setMaxWidth(200);
+        Label label = new Label("Haz click sobre el botón");
         Button button = new Button("Agregar");
-        button.setOnAction(actionEvent -> {
-            if (!field.textProperty().get().isEmpty()) {
-                list.add(field.getText());
-                field.setText("");
-                field.requestFocus();
-            }
-        });
-        root.getChildren().addAll(items, field, button);
+        root.getChildren().addAll(label, button);
+        button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> label.setText("Has dado click sobre el botón"));
         Scene scene = new Scene(root, 550, 500);
         stage.setScene(scene);
+        stage.setTitle("Evento click");
         stage.show();
     }
 
