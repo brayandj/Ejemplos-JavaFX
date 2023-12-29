@@ -18,18 +18,16 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-        HBox hBox = new HBox();
-        hBox.setSpacing(10);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setFillHeight(false);
-        Label label = new Label("Ey, prueba Layout");
+        VBox vBox = new VBox();
+        vBox.setSpacing(10);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setFillWidth(true); //el VBox debe expandirse a todo lo ancho posible,  llenando el espacio horizontal de su nodo padre.
         TextArea textArea = new TextArea();
-        HBox.setHgrow(textArea, Priority.ALWAYS);
-        HBox.setMargin(textArea, new Insets(0, 10, 0, 10));
-        hBox.getChildren().addAll(label, textArea);
-        Scene scene = new Scene(hBox, 750, 500);
+        VBox.setMargin(textArea, new Insets(0, 10, 0, 10));
+        vBox.getChildren().add(textArea);
+        Scene scene = new Scene(vBox, 500, 450);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo Layout HBOX");
+        stage.setTitle("Ejemplo layout con un VBOX");
         stage.show();
     }
 
