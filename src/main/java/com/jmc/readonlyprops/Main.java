@@ -20,34 +20,22 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-        GridPane root = new GridPane();
-        root.setGridLinesVisible(true);
+        AnchorPane root = new AnchorPane();
 
-        for (int row = 0; row <3; row++) {
-            for (int col = 0; col < 3; col ++) {
-                Button btn = new Button(col + "|" + row);
-                root.add(btn, col, row);
-            }
-        }
+        Button buttonRight = new Button("Boton derecho");
+        Button topLeft = new Button("Top izquierda");
+//        Ancla el botón "buttonRight" 10 píxeles arriba del borde inferior.
+        AnchorPane.setBottomAnchor(buttonRight, 10.0);
+//        Ancla el botón "buttonRight" 10 píxeles hacia adentro del borde derecho.
+        AnchorPane.setRightAnchor(buttonRight, 10.0);
 
-        ColumnConstraints cc1 = new ColumnConstraints(100);
-        ColumnConstraints cc2 = new ColumnConstraints(200);
-        cc2.setHalignment(HPos.CENTER);
-        ColumnConstraints cc3 = new ColumnConstraints(200);
-        cc3.setHalignment(HPos.RIGHT);
+        AnchorPane.setTopAnchor(topLeft, 20.0);
+        AnchorPane.setLeftAnchor(topLeft, 50.0);
 
-        RowConstraints rc1 = new RowConstraints(50);
-        rc1.setValignment(VPos.TOP);
-        RowConstraints rc2 = new RowConstraints(70);
-        RowConstraints rc3 = new RowConstraints(60);
-
-        root.getColumnConstraints().addAll(cc1, cc2, cc3);
-        root.getRowConstraints().addAll(rc1, rc2, rc3);
-
-        root.setStyle("-fx-padding: 10");
-        Scene scene = new Scene(root, 550, 350);
+        root.getChildren().addAll(topLeft, buttonRight);
+        Scene scene = new Scene(root, 550, 450);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo layout GridPane");
+        stage.setTitle("Ejemplo layout AnchorPane");
         stage.show();
     }
 
