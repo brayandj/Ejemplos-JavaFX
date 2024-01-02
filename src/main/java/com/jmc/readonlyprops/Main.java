@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,17 +20,34 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-        StackPane pane = new StackPane();
-        Rectangle rectangle = new Rectangle(300, 250);
-        // Establecer el color de relleno del rectángulo-.L
-        rectangle.setFill(Color.RED);
-        Label label = new Label("Un rectangulo");
-        StackPane.setAlignment(label, Pos.TOP_LEFT);
-        pane.getChildren().addAll(rectangle, label);
+        GridPane root = new GridPane();
+        root.setGridLinesVisible(true);
 
-        Scene scene = new Scene(pane, 400, 350);
+        for (int row = 0; row <3; row++) {
+            for (int col = 0; col < 3; col ++) {
+                Button btn = new Button(col + "|" + row);
+                root.add(btn, col, row);
+            }
+        }
+
+        ColumnConstraints cc1 = new ColumnConstraints(100);
+        ColumnConstraints cc2 = new ColumnConstraints(200);
+        cc2.setHalignment(HPos.CENTER);
+        ColumnConstraints cc3 = new ColumnConstraints(200);
+        cc3.setHalignment(HPos.RIGHT);
+
+        RowConstraints rc1 = new RowConstraints(50);
+        rc1.setValignment(VPos.TOP);
+        RowConstraints rc2 = new RowConstraints(70);
+        RowConstraints rc3 = new RowConstraints(60);
+
+        root.getColumnConstraints().addAll(cc1, cc2, cc3);
+        root.getRowConstraints().addAll(rc1, rc2, rc3);
+
+        root.setStyle("-fx-padding: 10");
+        Scene scene = new Scene(root, 550, 350);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo layout TackPane");
+        stage.setTitle("Ejemplo layout GridPane");
         stage.show();
     }
 
