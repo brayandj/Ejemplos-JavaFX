@@ -15,27 +15,30 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-        AnchorPane root = new AnchorPane();
+        TextFlow root = new TextFlow();
+        Text heading = new Text("Lorem ipsum");
 
-        Button buttonRight = new Button("Boton derecho");
-        Button topLeft = new Button("Top izquierda");
-//        Ancla el botón "buttonRight" 10 píxeles arriba del borde inferior.
-        AnchorPane.setBottomAnchor(buttonRight, 10.0);
-//        Ancla el botón "buttonRight" 10 píxeles hacia adentro del borde derecho.
-        AnchorPane.setRightAnchor(buttonRight, 10.0);
+        heading.setFill(Color.BLUE);
+        heading.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        Text paramgraph = new Text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam ea, esse eius quis quas quisquam dignissimos " +
+                "dolorem vitae unde nihil sunt totam error pariatur quos obcaecati est consequuntur. Voluptatibus, itaque? " +
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam ea, esse eius quis quas quisquam dignissimos \" +\n" +
+                "                \"dolorem vitae unde nihil sunt totam error pariatur quos obcaecati est consequuntur. Voluptatibus, itaque"
+                );
 
-        AnchorPane.setTopAnchor(topLeft, 20.0);
-        AnchorPane.setLeftAnchor(topLeft, 50.0);
-
-        root.getChildren().addAll(topLeft, buttonRight);
-        Scene scene = new Scene(root, 550, 450);
+        root.setLineSpacing(5);
+        root.setTextAlignment(TextAlignment.CENTER);
+        root.setPrefWidth(300);
+        root.getChildren().addAll(heading, paramgraph);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo layout AnchorPane");
+        stage.setTitle("Ejemplo layout TextFlow");
         stage.show();
     }
 
