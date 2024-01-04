@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -13,16 +12,25 @@ public class Main extends Application {
     public void start(Stage stage) {
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        MenuButton sites = new MenuButton("Sitios");
-        MenuItem google = new MenuItem("Google");
-        MenuItem youtube = new MenuItem("Youtube");
-        google.setOnAction(actionEvent -> System.out.println("Google.com"));
-        youtube.setOnAction(actionEvent -> System.out.println("Youtube.com"));
-        sites.getItems().addAll(google, youtube);
-        root.getChildren().addAll(sites);
+        Label label = new Label("Seccion de las estaciónes: ");
+        ToggleButton spring = new ToggleButton("Primavera");
+        ToggleButton summer = new ToggleButton("Verano");
+        ToggleButton fall = new ToggleButton("Otoño");
+        ToggleButton winter = new ToggleButton("Invierno");
+
+        ToggleGroup seasons = new ToggleGroup();
+        seasons.getToggles().addAll(spring, summer, fall, winter);
+        HBox seasonsLayout = new HBox();
+        seasonsLayout.setAlignment(Pos.CENTER);
+        seasonsLayout.setSpacing(5);
+        seasonsLayout.getChildren().addAll(spring, summer, fall, winter);
+        root.getChildren().addAll(label, seasonsLayout);
+        seasons.selectedToggleProperty().addListener((observableValue, toggle, t1) -> {
+        label.setText("La selección de las cuatro estaciones es: " + ((Labeled)t1).getText());
+        });
         Scene scene = new Scene(root, 500, 450);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo de control MenuButton");
+        stage.setTitle("Ejemplo de control ToggleButton");
         stage.show();
     }
 
