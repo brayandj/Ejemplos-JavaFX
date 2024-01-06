@@ -4,7 +4,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import javafx.scene.shape.*;
 
 
 public class ShapeNameCell extends ListCell<String> {
@@ -23,12 +23,19 @@ public class ShapeNameCell extends ListCell<String> {
     public Shape getShape(String name) {
         Shape shape = null;
         switch (name.toLowerCase()) {
-            case "César" -> shape = new Line(0, 10, 20, 10);
-            case "Fernando" -> shape = new Rectangle(0, 0, 20, 20);
-            case "Benjamín" -> shape = new Circle(20, 20, 10);
-            default ->  {
-            }
+            case "césar":
+                shape = new Line(0, 10, 20, 10);
+                break;
+            case "fernando":
+                shape = new Rectangle(0, 0, 20, 20);
+                break;
+            case "benjamín":
+                shape = new Circle(20, 20, 10);
+                break;
+            default:
+                break;
         }
-    return shape;
+        return shape;
     }
+
 }
