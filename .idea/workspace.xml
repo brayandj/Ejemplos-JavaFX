@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9931c9d0-e542-43ea-abd8-bf397df15516" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/ShapeNameCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
