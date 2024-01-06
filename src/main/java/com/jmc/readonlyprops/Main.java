@@ -10,38 +10,39 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    Label userSelection;
+    Label answer;
+    CheckBox checkBox;
     @Override
     public void init() throws Exception {
-        userSelection = new Label("Nada seleccionado aún");
+        answer = new Label("Tu respuesta: None");
+        checkBox = new CheckBox("Selecciónes");
     }
 
     @Override
     public void start(Stage stage) {
-        VBox root = new VBox(10);
+        VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        RadioButton spring = new RadioButton("Primavera");
-        RadioButton summer = new RadioButton("Verano");
-        RadioButton fall = new RadioButton("Otoño");
-        RadioButton winter = new RadioButton("Invierno");
+        root.setSpacing(10);
+        Label question = new Label("Estás a favor?");
+        checkBox.setAllowIndeterminate(true);
+        checkBox.selectedProperty().addListener(this::changed);
+        checkBox.indeterminateProperty().addListener(this::changed);
 
-        ToggleGroup group = new ToggleGroup();
-        group.getToggles().addAll(spring, summer, fall, winter);
-        group.selectedToggleProperty().addListener(this::changed);
-        root.getChildren().addAll(userSelection, spring, summer, fall, winter);
-        
+        root.getChildren().addAll(answer, question, checkBox);
         Scene scene = new Scene(root, 500, 450);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo de control RadioButton");
+        stage.setTitle("Ejemplo de control CheckBox");
         stage.show();
     }
 
-    private void changed(ObservableValue<? extends Toggle> observable, Toggle oldBtn, Toggle newBtn) {
-        String selectedLabel = "None";
-        if (newBtn != null) {
-            selectedLabel = ((Labeled)newBtn).getText();
+    private void changed(ObservableValue<? extends Boolean> observableValue, Boolean olVal, Boolean newVal) {
+        String choice;
+        if (checkBox.isIndeterminate()) {
+            choice = "Neutral";
+        } else {
+            choice = "En desacuerdo";
         }
-        userSelection.setText("Tu selección: " + selectedLabel);
+        answer.setText("Tu respuesta: " + choice);
     }
 
     public static void main(String[] args) {
