@@ -18,14 +18,15 @@ public class Main extends Application {
     public void start(Stage stage) {
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
-        Label selectedItemList = new Label("Primer selección en la lista");
-        Button btnSelectedFirst = new Button("Primer item");
-        ListView<String> list = new ListView<>();
-        ObservableList<String> names = FXCollections.observableArrayList("Fernándo", "César", "Benjamín", "Gerardo", "Brayan", "Roxana");
-        list.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> selectedItemList.setText("" + newValue));
-        list.getItems().addAll(names);
-        btnSelectedFirst.setOnAction(actionEvent -> list.getSelectionModel().selectFirst());
-        root.getChildren().addAll(selectedItemList, list, btnSelectedFirst);
+        ListView<Task> taskListView = new ListView<>();
+        ObservableList<Task> tasks = FXCollections.observableArrayList(
+                new Task("Crear proyecto Java"),
+                new Task("Create reporte de compra"),
+                new Task("Crear no sé que")
+        );
+        taskListView.setCellFactory(taskListView1 -> new CustomTaskCell());
+        taskListView.getItems().addAll(tasks);
+        root.getChildren().addAll(taskListView);
         Scene scene = new Scene(root, 500, 450);
         stage.setScene(scene);
         stage.setTitle("Ejemplo de un control ListView");
