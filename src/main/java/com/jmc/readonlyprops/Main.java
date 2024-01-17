@@ -4,6 +4,10 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeCell;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 
@@ -35,10 +39,26 @@ public class Main extends Application {
         classes.getChildren().addAll(classONe, classTwo);
         treeView.setRoot(classes);
         treeView.setShowRoot(false);
+        treeView.setEditable(true);
+        treeView.setCellFactory(tCell -> {
+            TreeCell<String> cell = new TreeCell<>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(null);
+                    setGraphic(null);
+                    if (!empty) {
+                        setText(item);
+                        setGraphic(new Rectangle(15, 15, Color.GREEN));
+                    }
+                }
+            };
+            return  cell;
+        });
         root.getChildren().addAll(treeView);
         Scene scene = new Scene(root, 500, 450);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo de un control TreeView parte 1");
+        stage.setTitle("Ejemplo de un control TreeView parte 2");
         stage.show();
     }
 
