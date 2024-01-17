@@ -12,6 +12,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         VBox root = new VBox();
         TableView<User> userTable = new TableView<>(UserUtility.getUserList());
+        userTable.setEditable(true);
         userTable.getColumns().addAll(
                 UserUtility.getFirstNameColumn(),
                 UserUtility.getLastNameColumn(),

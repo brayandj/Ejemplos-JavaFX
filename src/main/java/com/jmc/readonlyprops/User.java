@@ -40,4 +40,12 @@ public class User {
     public ObjectProperty<LocalDate> birDateProperty() {
         return birtDate;
     }
+
+    public void setFirtName(String newValue) {
+        this.firstName.set(newValue);
+    }
+
+    public void setBirthDate(LocalDate newValue) {
+        this.birtDate.set(newValue);
+    }
 }
