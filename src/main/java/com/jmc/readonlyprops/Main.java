@@ -1,65 +1,63 @@
 package com.jmc.readonlyprops;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeCell;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 
 public class Main extends Application {
+    Button startBtn = new Button("Comenzar");
+    Button resetBtn = new Button("Reiniciar");
+    Button cancelBtn = new Button("Cancelar");
+    Button exitBtn = new Button("Salir");
+    boolean onceStarted = false;
+
+//    Service<ObservableList<Integer>> service = new Service<>() {
+    ScheduledService<ObservableList<Integer>> service = new ScheduledService<>() {
+        @Override
+        protected Task<ObservableList<Integer>> createTask() {
+            return new EvenNumTask(1, 20, 100);
+        }
+    };
+
     @Override
     public void start(Stage stage) {
-        VBox root = new VBox(10);
-        root.setAlignment(Pos.CENTER);
-        TreeView<String> treeView = new TreeView<>();
-        TreeItem<String> classONe = new TreeItem<>("Class One");
-        classONe.setExpanded(true);
-        classONe.getChildren().addAll(
-                new TreeItem<>("Inóngo"),
-                new TreeItem<>("Negro"),
-                new TreeItem<>("Firulais"),
-                new TreeItem<>("Caracol")
-        );
-        TreeItem<String> classTwo = new TreeItem<>("Class Two");
-        classTwo.setExpanded(true);
-        classTwo.getChildren().addAll(
-                new TreeItem<>("César"),
-                new TreeItem<>("Gerarado"),
-                new TreeItem<>("Fernándo"),
-                new TreeItem<>("César")
-        );
-        classTwo.addEventHandler(TreeItem.branchExpandedEvent(),e -> System.out.println(e.getTreeItem().getValue()));
-        TreeItem<String> classes = new TreeItem<>("Clasess");
-        classes.getChildren().addAll(classONe, classTwo);
-        treeView.setRoot(classes);
-        treeView.setShowRoot(false);
-        treeView.setEditable(true);
-        treeView.setCellFactory(tCell -> {
-            TreeCell<String> cell = new TreeCell<>() {
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(null);
-                    setGraphic(null);
-                    if (!empty) {
-                        setText(item);
-                        setGraphic(new Rectangle(15, 15, Color.GREEN));
-                    }
-                }
-            };
-            return  cell;
+        service.setPeriod(Duration.seconds(5));
+        startBtn.setOnAction(e -> {
+            if (onceStarted) {
+                service.restart();
+            } else {
+                service.start();
+                onceStarted = true;
+                startBtn.setText("Restart");
+            }
         });
-        root.getChildren().addAll(treeView);
+
+        cancelBtn.setOnAction(e -> service.cancel());
+        resetBtn.setOnAction(e -> service.reset());
+        exitBtn.setOnAction(e -> Platform.exit());
+
+        GridPane pane = new WorkerUI(service);
+        HBox box = new HBox(5, startBtn, resetBtn, cancelBtn, exitBtn);
+        BorderPane root = new BorderPane();
+        root.setCenter(pane);
+        root.setBottom(box);
+        ;
         Scene scene = new Scene(root, 500, 450);
         stage.setScene(scene);
-        stage.setTitle("Ejemplo de un control TreeView parte 2");
+        stage.setTitle("Ejemplo de Concurrencia en JavaFx");
         stage.show();
+
     }
 
     public static void main(String[] args) {
