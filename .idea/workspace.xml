@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9931c9d0-e542-43ea-abd8-bf397df15516" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/WorkerUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/EvenNumTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/EvenNumUtil.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/UserUtility.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmc/readonlyprops/WorkerUI.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +19,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -74,7 +75,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-e1d2075fd9a7-b4911678" />
       </set>
     </attachedChunks>
   </component>
